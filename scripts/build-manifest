@@ -1,0 +1,11 @@
+#!/bin/sh
+
+test -n "$1" || exit 1
+
+set -ex
+
+video_file="$1"'#video'
+audio_file="$1"'#audio'
+duration_msec=10000
+
+exec MP4Box -dash "${duration_msec}" "${video_file}" "${audio_file}"
