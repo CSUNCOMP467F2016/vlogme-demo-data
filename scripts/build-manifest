@@ -8,4 +8,12 @@ video_file="$1"'#video'
 audio_file="$1"'#audio'
 duration_msec=10000
 
-exec MP4Box -dash "${duration_msec}" "${video_file}" "${audio_file}"
+manifest_name='dash.mpd'
+segment_name='track_$RepresentationID$'
+
+exec MP4Box \
+    -dash "${duration_msec}" \
+    -single-file \
+    -out "${manifest_name}" \
+    -segment-name "${segment_name}" \
+    "${video_file}" "${audio_file}"
